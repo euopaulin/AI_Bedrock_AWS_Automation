@@ -1,19 +1,17 @@
 import boto3
 import json
-import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+def automa_ia(): 
 
-client = boto3.client('bedrock-runtime', region_name='us-east-1')
+    client = boto3.client('bedrock-runtime', region_name='us-east-1')
 
-def auto_ai():
- 
-    model_id = "ai21.jamba-1-5-large-v1"
+    # Modelo da IA e prompt
+    model_id = "ai21.j2-mid-v1"
+    prompt = "Qual é a capital da França?"
 
     body = json.dumps({
-        "prompt": "Qual é a capital da França?",
-        "maxTokens": 200,
-        "temperature": 0.5
+        "prompt": prompt,
+        "maxTokens": 200
     })
 
     try:
@@ -23,13 +21,15 @@ def auto_ai():
             accept='application/json',
             body=body
         )
+
+        # Decodifica a resposta
         response_body = json.loads(response.get('body').read())
         completion = response_body.get('completions')[0].get('data').get('text')
-        
+
         print(f"Resposta do modelo: {completion}")
 
     except Exception as e:
-        logging.error(f"Erro ao invocar o modelo: {e}")
-
+        print(f"Ocorreu um erro: {e}")
+        
 if __name__ == "__main__":
-    auto_ai()
+    automa_ia()

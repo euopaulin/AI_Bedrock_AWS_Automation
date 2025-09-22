@@ -8,10 +8,10 @@ client = boto3.client('bedrock-runtime', region_name='us-east-1')
 
 def auto_ai():
  
-    model_id = "ai21.jamba-1-5-large-v1"
+    model_id = "amazon.nova-pro-v1:0"
 
     body = json.dumps({
-        "prompt": "Qual é a capital da França?",
+        "prompt": "Olás, meu nome é Paulo. Como você está?",
         "maxTokens": 200,
         "temperature": 0.5
     })

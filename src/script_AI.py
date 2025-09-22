@@ -5,7 +5,6 @@ def automa_ia():
 
     client = boto3.client('bedrock-runtime', region_name='us-east-1')
 
-<<<<<<< HEAD
 def auto_ai():
  
     model_id = "amazon.nova-pro-v1:0"
@@ -14,15 +13,6 @@ def auto_ai():
         "prompt": "Olás, meu nome é Paulo. Como você está?",
         "maxTokens": 200,
         "temperature": 0.5
-=======
-    # Modelo da IA e prompt
-    model_id = "ai21.j2-mid-v1"
-    prompt = "Qual é a capital da França?"
-
-    body = json.dumps({
-        "prompt": prompt,
-        "maxTokens": 200
->>>>>>> a2f1654c853904baf76c78833ea456f8258aa1a8
     })
 
     try:

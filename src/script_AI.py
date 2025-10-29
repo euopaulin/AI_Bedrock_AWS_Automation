@@ -1,19 +1,20 @@
 import boto3
 import json
 
+#Quando rodar o código será necessário ter as credenciais AWS configuradas na máquina local, pode ser feito atráves do AWS CLI ou variáveis de ambiente
+
 def automa_ia(historico_conversa):
-    client = boto3.client('bedrock-runtime', region_name='us-east-1')
-    model_id = 'amazon.titan-text-express-v1'
+    client = boto3.client('bedrock-runtime', region_name='us-east-1') #Escolho a região do meu AWS Console
+    model_id = 'amazon.titan-text-express-v1' #Escolho o modelo que quero usar
 
     body = {
-        #Antes estava sem "Human e Assistant", o que fazia o modelo responder de forma errada.
-        #Com human e assistant, o modelo entendeu que se trata de uma conversa entre humano 
-        #e IA e não precisa repetir o output a minha frase, somente a frase dele.
         "inputText": historico_conversa,
         "textGenerationConfig": {
-            #Após reduzir os tokens, o modelo respondeu corretamente.
+            #Aqui posso ajustar os parâmetros de geração de texto dentro do processo de fine tuning
             "maxTokenCount": 200,
             "temperature": 0.2,
+            "topP": 0.8,
+            "topK": 40
         }
     }
 
